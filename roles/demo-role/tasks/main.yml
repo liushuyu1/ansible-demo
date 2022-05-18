@@ -1,0 +1,18 @@
+- name: 任务1-将文件拷贝过去
+  copy:
+    src: demo-file.txt
+    dest: ~/demo-file1.txt
+    mode: 777
+- name: 任务2-将template拷贝过去
+  template:
+    src: demo-template.sh.j2
+    dest: ~/demo-template.sh
+    mode: 777
+- name: 任务3-获取~的目录路径
+  register: current_path
+  shell:
+    cmd: cd ~ && pwd
+- name: 任务4-执行demo-template.sh
+  with_items: "{{ current_path.stdout }}"
+  shell: 
+    cmd: "{{ item }}/demo-template.sh > ~/demo-template-out.txt"

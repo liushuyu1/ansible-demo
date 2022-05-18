@@ -1,0 +1,6 @@
+- name: publish the first demo playbook
+  hosts: group1
+  tags:
+    - demo-tag1
+  roles:
+    - { role: demo-role }
